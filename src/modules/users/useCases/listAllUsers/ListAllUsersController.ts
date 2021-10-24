@@ -6,7 +6,15 @@ class ListAllUsersController {
   constructor(private listAllUsersUseCase: ListAllUsersUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    // Complete aqui
+    const { id } = request.headers;
+
+    const users = this.listAllUsersUseCase.execute(id);
+
+    if(!users) {
+      return response.status(404).send({error: "Error occurred while listing users!"})
+    }
+
+    return response.send(users);
   }
 }
 
