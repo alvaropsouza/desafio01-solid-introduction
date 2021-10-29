@@ -7,6 +7,7 @@ class TurnUserAdminController {
 
   handle(request: Request, response: Response): Response {
     const { user_id } = request.body;
+<<<<<<< HEAD
     
     try {
       const user = this.turnUserAdminUseCase.execute({ user_id })
@@ -14,6 +15,16 @@ class TurnUserAdminController {
       return response.send(user)
     } catch (error) {
         return response.status(404).send({ error: error })
+=======
+
+    try {
+      const user = this.turnUserAdminUseCase.execute({ user_id });
+
+      return response.status(201).send(user);
+
+    } catch(error) {
+      return response.status(404).send({error: error})
+>>>>>>> changes
     }
   }
 }
