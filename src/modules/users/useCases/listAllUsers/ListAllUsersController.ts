@@ -8,13 +8,14 @@ class ListAllUsersController {
   handle(request: Request, response: Response): Response {
     const { id } = request.body;
 
-    const users = this.listAllUsersUseCase.execute(id);
+    try { 
+      const users = this.listAllUsersUseCase.execute(id);
+      
+      return response.send(users);
+    } catch(error) {
+      return response.status(400).send({error: error});
 
-    if(!users) {
-      return response.status(404).send({error: "Error occurred while listing users!"})
     }
-
-    return response.send(users);
   }
 }
 
